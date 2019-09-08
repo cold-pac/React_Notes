@@ -149,7 +149,7 @@
         <h2>React Notes</h2>
         <ol id = "TOC">
             <li id = "react-introduction" onclick = "intro();reInitHighlight(); menuChange(this);">Introduction</li>
-            <li onclick = "commenting();reInitHighlight(); menuChange(this)">Comments</li>
+            <li onclick = "commenting();reInitHighlight(); menuChange(this)">Commenting</li>
             <li id = "react-elements" onclick = "clickAgain(this);reactElem();reInitHighlight(); menuChange(this)">React Elements</li>
             <li id= "react-rendering" onclick = "clickAgain(this);renderR();reInitHighlight(); menuChange(this)">Rendering</li>
             <li id = "react-components" onclick = "clickAgain(this);reactComp();reInitHighlight(); menuChange(this)">React Components</li>
@@ -452,8 +452,6 @@
             <span>To create a React element: </span>
             <pre>{"                "}<code>{"\n"}{"                    "}const bro = &lt;div&gt; Hello World! &lt;/div&gt;{"\n"}{"\n"}{"                    "}const bro = ({"\n"}{"                        "}&lt;div&gt;{"\n"}{"                            "}&lt;h1&gt;This is a block of JSX&lt;/h1&gt;{"\n"}{"                            "}&lt;p&gt;Here's a subtitle&lt;/p&gt;{"\n"}{"                        "}&lt;/div&gt;{"\n"}{"                    "});{"\n"}{"                    "}//best practice to use parentheses{"\n"}{"                "}</code>{"\n"}{"            "}</pre>
             <br />
-            <span>To add comments use <b>{'{'}/* */{'}'}</b></span>
-            <br />
             <span>You cannot use "class" to define HTML classes in JSX (class is a reserved for object constructor functions in JavaScript). Use <b>className</b> instead (remember camelCase for everything)</span>
             <pre>{"                "}<code>{"\n"}{"                    "}const bro = ({"\n"}{"                        "}&lt;div className = 'myDiv'&gt;{"\n"}{"                            "}&lt;h1&gt;Add a class to this div&lt;/h1&gt;{"\n"}{"                        "}&lt;/div&gt;{"\n"}{"                    "});{"\n"}{"                "}</code>{"\n"}{"            "}</pre>
             <br />
@@ -521,6 +519,8 @@
         console.log("works");
         ReactDOM.render(propsNotes, document.getElementById("container"));
     }
+
+    const
 
 </script>
 </body>
