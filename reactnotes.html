@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>React Notes</title>
+
+    <link rel = "shortcut icon" href = "https://scriptverse.academy/img/thumbnails/reactjs.png">
+
+
+    <!-- highlight.js -->
+    <!-- styles/agate.css"> and /styles/a11y-dark.css"> both also good themes, default.css -->
+    <link rel = "stylesheet" href = "https://richarddawkinsweaselprogram.000webhostapp.com/Additional/styles/xcode.css">
+    <script src="https://richarddawkinsweaselprogram.000webhostapp.com/Additional/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <!-- so that highlight.js will work anywhere -->
+    <link rel="stylesheet"
+          href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/agate.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <!-- JSX react cdns -->
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"> </script>
+
+    <style>
+        html, body {
+            line-height: 1.8em;
+            font-size: 1.03em;
+            font-family: Helvetica;
+
+        }
+        img[src*="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhost-white2.png"] {
+              display: none;
+
+          }
+        br {
+            display: block;
+            margin: 100px 0;
+        }
+        #container {
+                display: flex;
+                flex-direction: column;
+            // height: 100vh;
+                width: 1000px;
+            // width: 80vw;
+                margin: 20px;
+                position: relative;
+                left: 280px;
+            }
+        pre code {
+              // background-color: #eee;
+                  border: 1px solid #999;
+              //border-left: 2px solid green;
+                  margin-top: -30px;
+                  margin-bottom: -60px;
+              }
+        b {
+                    background: #ebebeb;
+                    font-family: Monospace;
+                    padding: 2px;
+                    color: #f55442;
+                    font-weight: 600;
+                }
+        #contents {
+            position: fixed;
+            display: block;
+            top: 200px;
+            left: 10px;
+        }
+        #contents h2 {
+            text-align: center;
+            display: none;
+        }
+        #contents li:hover {
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        @media (orientation:portrait) {
+            #container {
+                        width: 100vw;
+                        position: static;
+                    }
+            #contents {
+                position: static;
+                text-align: center;
+                width: 100vw;
+            }
+            pre {
+                font-size: 26px;
+                position: relative;
+                right: 100px;
+                width: 100vw;
+            }
+        }
+
+    </style>
+    <script>
+        function reInitHighlight () {
+            hljs.initHighlighting.called = false;
+            hljs.initHighlighting();
+        }
+    </script>
+</head>
+<body>
+<div id = "contents">
+    <h2>Contents</h2>
+    <ol id = "TOC">
+        <li id = "react-introduction" onclick = "intro();clickAgain(this);reInitHighlight();clickAgain(this)">Introduction</li>
+        <li onclick = "commenting();clickAgain(this);reInitHighlight();clickAgain(this)">Comments</li>
+        <li id = "react-elements" onclick = "reactElem();clickAgain(this);reInitHighlight();clickAgain(this)">React Elements</li>
+        <li id= "react-rendering"onclick = "renderR();clickAgain(this);reInitHighlight();clickAgain(this)">Rendering</li>
+        <li id = "react-components" onclick = "reactComp();clickAgain(this);reInitHighlight();clickAgain(this)">React Components</li>
+        <li id = "react-props" onclick = "reactProps();clickAgain(this);reInitHighlight();clickAgain(this)">Props</li>
+    </ol>
+</div>
+<div id = "container">
+    <span>ReactJs = an open source JavaScript library, for creating user interfaces. Created and maintained by Facebook. </span>
+    <br/>
+    <span>Uses its own markup language 'JSX' - lets your write readable HTML directly within JavaScript.</span>
+    <br/>
+    <span>To write vanilla JavaScript within JSX use curly brackets: </span>
+    <pre>
+                <code>
+                    { //blah blah blah this is some JavaScript }
+                </code>
+            </pre>
+    <span>JSX code must be compiled into JavaScript. Use a 'transpiler' like Babel.</span>
+    <br/>
+    <span>To create React element: </span>
+    <pre>
+                <code>
+                    const bro = &lt;div&gt; Hello World! &lt;/div&gt;
+
+                    const bro = (
+                        &lt;div&gt;
+                            &lt;h1&gt;This is a block of JSX&lt;/h1&gt;
+                            &lt;p&gt;Here's a subtitle&lt;/p&gt;
+                        &lt;/div&gt;
+                    );
+                    //best practice to use parentheses
+                </code>
+            </pre>
+    <br/>
+    <span>To add comments use <b>{/* */}</b></span>
+    <br/>
+    <span>You need to render your JSX to the HTML DOM using React's rendering API - ReactDOM. ==> contains a  <b>.render()</b> method you can use to render React elements to the DOM like this <b>ReactDOM.render(componentToRender, targetNode)</b>. <b>componentToRender</b> = React element you want to render, <b>targetNode</b> = DOM node that you want to render the component to. Must be declared after the JSX element declarations (like how you must declare variables before you use them)!</span>
+    <pre>
+                <code>
+                    const bro = (
+                        &lt;div&gt;
+                            &lt;h1>Hello World&lt;/h1&gt;
+                            &lt;p&gt;Lets render this to the DOM&lt;/p&gt;
+                        &lt;/div&gt;
+                    );
+
+                    ReactDOM.render(bro, document.getElementById('target'));
+                </code>
+            </pre>
+    <br/>
+    <span>You cannot use "class" to define HTML classes in JSX (class is a reserved for object constructor functions in JavaScript). Use <b>className</b> instead (remember camelCase for everything)</span>
+    <pre>
+                <code>
+                    const bro = (
+                        &lt;div className = 'myDiv'&gt;
+                            &lt;h1&gt;Add a class to this div&lt;/h1&gt;
+                        &lt;/div&gt;
+                    );
+                </code>
+            </pre>
+    <br/>
+    <span>In JSX, every tag can be self closing i.e. instead of <b>&lt;div&gt; &lt;/div&gt;</b> you can just use <b>&lt;div /&gt;</b></span>
+    <br/>
+    <span>Everything in React is a 'component'. React 'components' are like JS functions -> accept inputs (called "props") and return React elements. <br/>  There are two ways to create a React component. <br/> 1) use a JavaScript function ==> creates a 'functional' component. 'Stateless' because it can receive data and render it, but does not manage or track changes to that data. Remember: functions in React must begin with a capital!</span>
+    <pre>
+                <code>
+                    const DemoComponent = function() {
+                        return (
+                            &lt;div className='customClass' /&gt;
+                        );
+                    };
+                </code>
+            </pre>
+    <br/>
+    <span>2) Using the ES6 class syntax (for object constructor functions): </span>
+    <pre>
+                <code>
+                    class Kitten extends React.Component {
+                          constructor(props) {
+                            super(props);
+                          }
+
+                          render() {
+                            return (
+                              &lt;h1&gt;Hi&lt;/h1&gt;
+                            );
+                          }
+                        }
+                </code>
+            </pre>
+    <span>Class constructor calls <b>super()</b>, which calls the constructor of the parent class (React.Component). Constructor = special method called during the initialisation of objects created using the class syntax. Best practice to call a component's constructor with super, and pass props to both. Makes sure the component is initialized properly.</span>
+    <br/>
+    <span>COMPONENT COMPOSITION: <br/> When you have created many components (created in either way - as simple, stateless functional components or as ES6 class components) - you can create <i>parent</i> components that renders other components as <i>children</i> - by including the child component's name as a tag in the <b>render</b> method of the parent. E.g.</span>
+    <pre>
+        <code>
+            const ChildComponent = () => {
+              return (
+                &lt;div&gt;
+                  &lt;p&gt;I am the child&lt;/p&gt;
+                &lt;/div&gt;
+              );
+            };
+
+            class ParentComponent extends React.Component {
+              constructor(props) {
+                super(props);
+              }
+              render() {
+                return (
+                  &lt;div&gt;
+                    &lt;h1&gt;I am the parent&lt;/h1&gt;
+                    &lt;ChildComponent/&gt;
+                  &lt;/div&gt;
+                );
+              }
+            };
+        </code>
+    </pre>
+    <span>Think about your user interface in terms of components - break your UI down into building blocks</span>
+    <br/>
+    <span>To actually use components (i.e. render React components to the DOM by making a call to the ReactDOM API) -  set a React element as = to the Component, like <b>let my-element = &lt; component-name /&gt; ReactDOM.render(element, document.getElementById("target"));</b> or just go <b>ReactDOM.render(&lt; component-name /&gt;, document.getElementById("target"))</b> </span>
+    <br/>
+    <span>PROPS: you can pass "props" (properties) to child components. They can have any name you like, be any type of variable (a string, an array, an object) e.g. if you have a parent <b>App</b> component that renders a child component <b>Welcome</b>, you can pass the child component a <b>user</b> property</span>
+    <pre>
+        <code>
+            const Welcome = (props) => &lt;h1&gt;Hello, {props.user}!&lt;/h1&gt;
+            //standard to call this props
+
+            //render () {....
+            &lt;App&gt;
+                &lt;Welcome user = 'Mark' /&gt;
+            &lt;/App&gt;
+
+
+            const ChildComponent = (props) => &lt;p&gt;{props.colors.join(', ')}&lt;/p&gt; {//array methods can be called on the property when you access it}
+
+            &lt;ParentComponent&gt;
+              &lt;ChildComponent colors={["green", "blue", "red"]} /&gt; {//to pass an array as a prop, it must be treated as JavaScript and wrapped in curly brackets}
+            &lt;/ParentComponent&gt;
+        </code>
+    </pre>
+    <span>An example:</span>
+    <pre>
+        <code>
+            const List= (props) => {
+              return &lt;p&gt;{props.tasks.join(", ")}&lt;/p&gt;
+            };
+
+            class ToDo extends React.Component {
+              constructor(props) {
+                super(props);
+              }
+              render() {
+                return (
+                  &lt;div&gt;
+                    &lt;h1&gt;To Do Lists&lt;/h1&gt;
+                    &lt;h2&gt;Today&lt;/h2&gt;
+                    &lt;List tasks = {["join the gym", "join the army", "go to dinner"]}/&gt;
+                    &lt;h2&gt;Tomorrow&lt;/h2&gt;
+                    &lt;List tasks = {["walk dog", "wonder about life", "do a pullup"]}/&gt;
+                  &lt;/div&gt;
+                );
+              }
+            };
+        </code>
+    </pre>
+    <span>To use default props: only assigned "if necessary" i.e. you haven't manually set it in the parent component - by accessing the component's <b>defaultProps</b> property (which is itself an object) e.g.</span>
+    <pre>
+        <code>
+            const ShoppingCart = (props) => {
+              return (
+                &lt;div&gt;
+                  &lt;h1&gt;Shopping Cart Component&lt;/h1&gt;
+                &lt;/div&gt;
+              )
+            };
+            ShoppingCart.defaultProps = {items: 0};
+
+        </code>
+    </pre>
+    <br/>
+
+    <span id = "experimental"></span>
+    <br/>
+    <button onclick = "changeReact();clickCount = !clickCount;">Press</button>
+    <br/>
+    <span id = "experimental2"></span>
+    <script type = "text/babel">
+        //see how React lets you write HTML WITHIN javascript
+        const bro = (
+            <div>
+                <ul>
+                    <li>I will put example uses of React here</li>
+                </ul>
+            </div>
+        );
+        let friend = <div>Pretty neat huh?</div>;
+        let clickCount = true;
+
+        function changeReact() {
+            if (clickCount) {
+                ReactDOM.render(bro, document.getElementById('experimental'));
+            } else {
+                ReactDOM.render(friend, document.getElementById('experimental'));
+            }
+
+        }
+
+        const ChildComponent = (props) => {
+            return (
+                <div>
+                    <p>I am the child {props.name}</p>
+                </div>
+            );
+        };
+
+        class ParentComponent extends React.Component {
+            constructor(props) {
+                super(props);
+            }
+            render() {
+                return (
+                    <div>
+                        <h1>I am the parent</h1>
+                        <ChildComponent/>
+                        <ul>
+                            <li>Hello</li>
+                        </ul>
+                    </div>
+                );
+            }
+        };
+
+        let myElement = <ParentComponent name = "Johnny"/>;
+
+        ReactDOM.render(myElement, document.getElementById("experimental2"));
+        ReactDOM.render(<ParentComponent />, document.getElementById("experimental2"));
+    </script>
+</div>
+<script type = "text/babel">
+
+    function clickAgain (domObj) {
+        domObj.click();
+    }
+
+    const introduction = (
+        <div>
+            <span>ReactJs = an open source JavaScript library, for creating user interfaces. Created and maintained by Facebook. </span>
+            <br /><br />
+            <span>Uses its own markup language 'JSX' - lets your write readable HTML directly within JavaScript.</span>
+            <br /><br />
+            <span>To write vanilla JavaScript within JSX use curly brackets: </span>
+            <pre>{"                "}<code>{"\n"}{"                    "}{"{"} //blah blah blah this is some JavaScript {"}"}{"\n"}{"                "}</code>{"\n"}{"            "}</pre>
+            <span>JSX code must be compiled into JavaScript. Use a 'transpiler' like Babel.</span>
+            <br /><br/>
+            <span>(To use React in your page) you have two options: you can just use normal JavaScript syntax in a .js file (natively supported by the browser) + cdns for React - but the syntax is more complex. Or equivalently, you can use "JSX" code (as in an actual <i>syntax extension</i> to javascript) which is neater/cleaner but requires a transpiler. For a quick cdn, use: <b> &lt;script src="https://unpkg.com/babel-standalone@6/babel.min.js"&gt; &lt;/script&gt;</b> and add <b>type = "text/babel"</b> to any script tag you want to use JSX in. However, this is slow ==&gt; faster/more complicated method is to download (with npm) a preprocessor that will convert your file to plain js. <br />
+          Remember - You need CDNs for React as well as for the transpiler! There are three in total! <br/>
+          <a href="https://reactjs.org/docs/add-react-to-a-website.html" target="_blank">Follow this</a>
+        </span>
+        </div>
+    );
+
+    function intro() {
+            console.log("clicked");
+            ReactDOM.render(introduction, document.getElementById('container'));
+            /* if (clickCounter == 0) {
+                document.getElementById("react-introduction").click();
+                clickCounter = 1;
+            }
+            clickCounter = 0; */
+    }
+
+    const reactComment = (
+        <span>To add comments use <b>{'{'}/* */{'}'}</b></span>
+    );
+
+    function commenting() {
+        ReactDOM.render(reactComment, document.getElementById('container'));
+    }
+
+    const reactElements = (
+        <div>
+            <span>To create React element: </span>
+            <pre>{"                "}<code>{"\n"}{"                    "}const bro = &lt;div&gt; Hello World! &lt;/div&gt;{"\n"}{"\n"}{"                    "}const bro = ({"\n"}{"                        "}&lt;div&gt;{"\n"}{"                            "}&lt;h1&gt;This is a block of JSX&lt;/h1&gt;{"\n"}{"                            "}&lt;p&gt;Here's a subtitle&lt;/p&gt;{"\n"}{"                        "}&lt;/div&gt;{"\n"}{"                    "});{"\n"}{"                    "}//best practice to use parentheses{"\n"}{"                "}</code>{"\n"}{"            "}</pre>
+            <br />
+            <span>To add comments use <b>{'{'}/* */{'}'}</b></span>
+            <br />
+            <span>You cannot use "class" to define HTML classes in JSX (class is a reserved for object constructor functions in JavaScript). Use <b>className</b> instead (remember camelCase for everything)</span>
+            <pre>{"                "}<code>{"\n"}{"                    "}const bro = ({"\n"}{"                        "}&lt;div className = 'myDiv'&gt;{"\n"}{"                            "}&lt;h1&gt;Add a class to this div&lt;/h1&gt;{"\n"}{"                        "}&lt;/div&gt;{"\n"}{"                    "});{"\n"}{"                "}</code>{"\n"}{"            "}</pre>
+            <br />
+            <span>In JSX, every tag can be self closing i.e. instead of <b>&lt;div&gt; &lt;/div&gt;</b> you can just use <b>&lt;div /&gt;</b></span>
+        </div>
+    );
+
+    function reactElem() {
+            console.log("works");
+            ReactDOM.render(reactElements, document.getElementById('container'));
+    }
+
+    var RenderReact = (
+                <div>
+                    <span>You need to render your JSX to the HTML DOM using React's rendering API - ReactDOM. ==&gt; contains a  <b>.render()</b> method you can use to render React elements to the DOM like this <b>ReactDOM.render(componentToRender, targetNode)</b>. <b>componentToRender</b> = React element you want to render, <b>targetNode</b> = DOM node that you want to render the component to. Must be declared after the JSX element declarations (like how you must declare variables before you use them)!</span>
+                    <pre>{"                "}<code>{"\n"}{"                    "}const bro = ({"\n"}{"                        "}&lt;div&gt;{"\n"}{"                            "}&lt;h1&gt;Hello World&lt;/h1&gt;{"\n"}{"                            "}&lt;p&gt;Lets render this to the DOM&lt;/p&gt;{"\n"}{"                        "}&lt;/div&gt;{"\n"}{"                    "});{"\n"}{"\n"}{"                    "}ReactDOM.render(bro, document.getElementById('target'));{"\n"}{"                "}</code>{"\n"}{"            "}</pre>
+                    <br />
+                </div>
+            );
+
+    function renderR() {
+        console.log("works render");
+        ReactDOM.render(RenderReact, document.getElementById('container'));
+    }
+
+
+    const reactComponents = (
+        <div>
+            <span>Everything in React is a 'component'. React 'components' are like JS functions -&gt; accept inputs (called "props") and return React elements. <br />  There are two ways to create a React component. <br /> 1) use a JavaScript function ==&gt; creates a 'functional' component. 'Stateless' because it can receive data and render it, but does not manage or track changes to that data. Remember: functions in React must begin with a capital!</span>
+            <pre>{"                "}<code>{"\n"}{"                    "}const DemoComponent = function() {"{"}{"\n"}{"                        "}return ({"\n"}{"                            "}&lt;div className='customClass' /&gt;{"\n"}{"                        "});{"\n"}{"                    "}{"}"};{"\n"}{"                "}</code>{"\n"}{"            "}</pre>
+            <br />
+            <span>2) Using the ES6 class syntax (for object constructor functions): </span>
+            <pre>{"                "}<code>{"\n"}{"                    "}class Kitten extends React.Component {"{"}{"\n"}{"                          "}constructor(props) {"{"}{"\n"}{"                            "}super(props);{"\n"}{"                          "}{"}"}{"\n"}{"\n"}{"                          "}render() {"{"}{"\n"}{"                            "}return ({"\n"}{"                              "}&lt;h1&gt;Hi&lt;/h1&gt;{"\n"}{"                            "});{"\n"}{"                          "}{"}"}{"\n"}{"                        "}{"}"}{"\n"}{"                "}</code>{"\n"}{"            "}</pre>
+            <span>Class constructor calls <b>super()</b>, which calls the constructor of the parent class (React.Component). Constructor = special method called during the initialisation of objects created using the class syntax. Best practice to call a component's constructor with super, and pass props to both. Makes sure the component is initialized properly.</span>
+            <br />
+            <span>COMPONENT COMPOSITION: <br /> When you have created many components (created in either way - as simple, stateless functional components or as ES6 class components) - you can create <i>parent</i> components that renders other components as <i>children</i> - by including the child component's name as a tag in the <b>render</b> method of the parent. E.g.</span>
+            <pre>{"        "}<code>{"\n"}{"            "}const ChildComponent = () =&gt; {"{"}{"\n"}{"              "}return ({"\n"}{"                "}&lt;div&gt;{"\n"}{"                  "}&lt;p&gt;I am the child&lt;/p&gt;{"\n"}{"                "}&lt;/div&gt;{"\n"}{"              "});{"\n"}{"            "}{"}"};{"\n"}{"\n"}{"            "}class ParentComponent extends React.Component {"{"}{"\n"}{"              "}constructor(props) {"{"}{"\n"}{"                "}super(props);{"\n"}{"              "}{"}"}{"\n"}{"              "}render() {"{"}{"\n"}{"                "}return ({"\n"}{"                  "}&lt;div&gt;{"\n"}{"                    "}&lt;h1&gt;I am the parent&lt;/h1&gt;{"\n"}{"                    "}&lt;ChildComponent/&gt;{"\n"}{"                  "}&lt;/div&gt;{"\n"}{"                "});{"\n"}{"              "}{"}"}{"\n"}{"            "}{"}"};{"\n"}{"        "}</code>{"\n"}{"    "}</pre>
+            <span>Think about your user interface in terms of components - break your UI down into building blocks</span>
+            <br />
+            <span>To actually use components (i.e. render React components to the DOM by making a call to the ReactDOM API) -  set a React element as = to the Component, like <b>let my-element = &lt; component-name /&gt; ReactDOM.render(element, document.getElementById("target"));</b> or just go <b>ReactDOM.render(&lt; component-name /&gt;, document.getElementById("target"))</b> </span>
+            <br />
+        </div>
+    );
+
+    function reactComp() {
+        console.log("works");
+        ReactDOM.render(reactComponents, document.getElementById('container'));
+    }
+
+    const propsNotes = (
+        <div>
+            <span>PROPS: you can pass "props" (properties) to child components. They can have any name you like, be any type of variable (a string, an array, an object) e.g. if you have a parent <b>App</b> component that renders a child component <b>Welcome</b>, you can pass the child component a <b>user</b> property</span>
+            <pre>{"        "}<code>{"\n"}{"            "}const Welcome = (props) =&gt; &lt;h1&gt;Hello, {"{"}props.user{"}"}!&lt;/h1&gt;{"\n"}{"            "}//standard to call this props{"\n"}{"\n"}{"            "}//render () {"{"}....{"\n"}{"            "}&lt;App&gt;{"\n"}{"                "}&lt;Welcome user = 'Mark' /&gt;{"\n"}{"            "}&lt;/App&gt;{"\n"}{"\n"}{"\n"}{"            "}const ChildComponent = (props) =&gt; &lt;p&gt;{"{"}props.colors.join(', '){"}"}&lt;/p&gt; {"{"}//array methods can be called on the property when you access it{"}"}{"\n"}{"\n"}{"            "}&lt;ParentComponent&gt;{"\n"}{"              "}&lt;ChildComponent colors={"{"}["green", "blue", "red"]{"}"} /&gt; {"{"}//to pass an array as a prop, it must be treated as JavaScript and wrapped in curly brackets{"}"}{"\n"}{"            "}&lt;/ParentComponent&gt;{"\n"}{"        "}</code>{"\n"}{"    "}</pre>
+            <span>An example:</span>
+            <pre>{"        "}<code>{"\n"}{"            "}const List= (props) =&gt; {"{"}{"\n"}{"              "}return &lt;p&gt;{"{"}props.tasks.join(", "){"}"}&lt;/p&gt;{"\n"}{"            "}{"}"};{"\n"}{"\n"}{"            "}class ToDo extends React.Component {"{"}{"\n"}{"              "}constructor(props) {"{"}{"\n"}{"                "}super(props);{"\n"}{"              "}{"}"}{"\n"}{"              "}render() {"{"}{"\n"}{"                "}return ({"\n"}{"                  "}&lt;div&gt;{"\n"}{"                    "}&lt;h1&gt;To Do Lists&lt;/h1&gt;{"\n"}{"                    "}&lt;h2&gt;Today&lt;/h2&gt;{"\n"}{"                    "}&lt;List tasks = {"{"}["join the gym", "join the army", "go to dinner"]{"}"}/&gt;{"\n"}{"                    "}&lt;h2&gt;Tomorrow&lt;/h2&gt;{"\n"}{"                    "}&lt;List tasks = {"{"}["walk dog", "wonder about life", "do a pullup"]{"}"}/&gt;{"\n"}{"                  "}&lt;/div&gt;{"\n"}{"                "});{"\n"}{"              "}{"}"}{"\n"}{"            "}{"}"};{"\n"}{"        "}</code>{"\n"}{"    "}</pre>
+            <span>To use default props: only assigned "if necessary" i.e. you haven't manually set it in the parent component - by accessing the component's <b>defaultProps</b> property (which is itself an object) e.g.</span>
+            <pre>{"        "}<code>{"\n"}{"            "}const ShoppingCart = (props) =&gt; {"{"}{"\n"}{"              "}return ({"\n"}{"                "}&lt;div&gt;{"\n"}{"                  "}&lt;h1&gt;Shopping Cart Component&lt;/h1&gt;{"\n"}{"                "}&lt;/div&gt;{"\n"}{"              "}){"\n"}{"            "}{"}"};{"\n"}{"            "}ShoppingCart.defaultProps = {"{"}items: 0{"}"};{"\n"}{"\n"}{"        "}</code>{"\n"}{"    "}</pre>
+            <br />
+        </div>
+    );
+
+    function reactProps() {
+        console.log("works");
+        ReactDOM.render(propsNotes, document.getElementById("container"));
+    }
+
+</script>
+</body>
+</html>
