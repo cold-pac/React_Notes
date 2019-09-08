@@ -106,12 +106,12 @@
 <div id = "contents">
     <h2>Contents</h2>
     <ol id = "TOC">
-        <li id = "react-introduction" onclick = "intro();clickAgain(this);reInitHighlight();clickAgain(this)">Introduction</li>
-        <li onclick = "commenting();clickAgain(this);reInitHighlight();clickAgain(this)">Comments</li>
-        <li id = "react-elements" onclick = "reactElem();clickAgain(this);reInitHighlight();clickAgain(this)">React Elements</li>
-        <li id= "react-rendering"onclick = "renderR();clickAgain(this);reInitHighlight();clickAgain(this)">Rendering</li>
-        <li id = "react-components" onclick = "reactComp();clickAgain(this);reInitHighlight();clickAgain(this)">React Components</li>
-        <li id = "react-props" onclick = "reactProps();clickAgain(this);reInitHighlight();clickAgain(this)">Props</li>
+        <li id = "react-introduction" onclick = "intro();reInitHighlight();">Introduction</li>
+        <li onclick = "commenting();reInitHighlight();">Comments</li>
+        <li id = "react-elements" onclick = "clickAgain(this);reactElem();reInitHighlight();">React Elements</li>
+        <li id= "react-rendering" onclick = "clickAgain(this);renderR();reInitHighlight();">Rendering</li>
+        <li id = "react-components" onclick = "clickAgain(this);reactComp();reInitHighlight();">React Components</li>
+        <li id = "react-props" onclick = "reactProps();reInitHighlight();">Props</li>
     </ol>
 </div>
 <div id = "container">
@@ -349,8 +349,16 @@
 </div>
 <script type = "text/babel">
 
+    let executeOnce = true;
     function clickAgain (domObj) {
-        domObj.click();
+        console.log(domObj);
+        if (executeOnce == true) {
+            executeOnce = false;
+            setTimeout(function(){domObj.click(); executeOnce = true;},5);
+        }
+
+
+        //domObj.click();
     }
 
     const introduction = (
@@ -416,7 +424,7 @@
             );
 
     function renderR() {
-        console.log("works render");
+        console.log("render-notes function executed");
         ReactDOM.render(RenderReact, document.getElementById('container'));
     }
 
