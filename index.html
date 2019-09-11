@@ -158,6 +158,33 @@
         </ol>
     </div>
     <div id = "container">
+        <span id = "time"></span>
+        <br/>
+        <div>
+            To do:
+            <ul>
+                <li>Finish FCC curriculum</li>
+                <li>Do the Helsinki full-stack course</li>
+                <li>Grid codewars, leetcode, euler</li>
+                <li>MOOC courses - algorithms, React etc</li>
+                <li>Learn C++</li>
+            </ul>
+            Projects:
+            <ul>
+                <li>Python game</li>
+                <li>Finish lung sounds</li>
+                <li>Portfolio Website</li>
+            </ul>
+        </div>
+        <script>
+
+            setInterval(function(){
+                let time = new Date();
+                let year = time.getFullYear(), month = time.getMonth(), day = time.getDate(), hour = time.getHours(), minutes = time.getMinutes(), seconds = time.getSeconds();
+                document.getElementById("time").innerHTML = day + "." + month + "." + year + " " + hour + ":" + minutes + ":" + seconds;
+            }, 10);
+        </script>
+        <!--
         <span>ReactJs = an open source JavaScript library, for creating user interfaces. Created and maintained by Facebook. </span>
         <br/>
         <span>Uses its own markup language 'JSX' - lets your write readable HTML directly within JavaScript.</span>
@@ -391,7 +418,7 @@
             ReactDOM.render(myElement, document.getElementById("experimental2"));
             ReactDOM.render(<ParentComponent />, document.getElementById("experimental2"));
         </script>
-    </div>
+    </div> -->
 </div>
 <script type = "text/babel">
 
@@ -410,7 +437,7 @@
 
     }
 
-    //reclicks element passed to it after 1 millisecond --> executeOnce immediately set as false, then set to true again but only AFTER click is executed
+    //reclicks element passed to it after 1 millisecond = executeOnce immediately set as false, then set to true again but only AFTER click is executed
     let executeOnce = true;
     function clickAgain (domObj) {
         console.log(domObj);
@@ -522,8 +549,6 @@
         console.log("works");
         ReactDOM.render(propsNotes, document.getElementById("container"));
     }
-
-    //const
 
 </script>
 </body>
