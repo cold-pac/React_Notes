@@ -180,12 +180,17 @@
             </ul>
         </div>
         <script>
-
-            setInterval(function(){
+            let clock = setInterval(function(){
                 let time = new Date();
                 let year = time.getFullYear(), month = time.getMonth() + 1, day = time.getDate(), hour = time.getHours(), minutes = time.getMinutes(), seconds = time.getSeconds();
                 document.getElementById("time").innerHTML = day + "." + month + "." + year + " " + hour + ":" + minutes + ":" + seconds;
             }, 10);
+
+            Array.from(document.getElementsByTagName("li")).forEach(function(element){
+                element.addEventListener("click", function() {
+                    clearInterval(clock);
+                });
+            });
         </script>
         <!--
         <span>ReactJs = an open source JavaScript library, for creating user interfaces. Created and maintained by Facebook. </span>
@@ -567,6 +572,10 @@
             <br /> <br />
             <span>To give a React component <b>state</b>, declare a state 'property' on the ES6 component class, in the class' <b>constructor</b> function (i.e. like any property, when the class is called to create an object - 'initialising the component' - it is created with a <b>state</b> property). The <b>state</b> object must be set as = a javascript object, like this: </span>
             <pre>{"\t"}<code>{"    "}{"\n"}{"        "}class StatefulComponent extends React.Component {"{"}{"\n"}{"          "}constructor(props) {"{"}{"\n"}{"            "}super(props);{"\n"}{"            "}this.state = {"{"}{"\n"}{"              "}name: "John"{"\n"}{"            "}{"}"};{"\n"}{"          "}{"}"}{"\n"}{"          "}render() {"{"}{"\n"}{"            "}return ({"\n"}{"              "}&lt;div&gt;{"\n"}{"                "}&lt;h1&gt;{"{"}this.state.name{"}"}&lt;/h1&gt;{"\n"}{"              "}&lt;/div&gt;{"\n"}{"            "});{"\n"}{"          "}{"}"}{"\n"}{"        "}{"}"};{"\n"}{"    "}</code>{"\n"}</pre>
+            <span><b>State</b> allows you to track important data in your app and render a UI in response to changes in data. React uses a Virtual DOM to track changes behind the scenes. When state data updates, it triggers a re-render of components using that data. </span>
+            <br /><br />
+            <span>In the render method, before the return statement, you can write any javascript you want, i.e. declare a function, alter the data in <b>state</b> or <b>props</b>, assign data to variables, which you have access to in the return statement. </span>
+            <pre>{"\t"}<code>{"\n"}{"    "}{"\t"}class MyComponent extends React.Component {"{"}{"\n"}{"            "}constructor(props) {"{"}{"\n"}{"                "}super(props);{"\n"}{"                "}this.state = {"{"}{"\n"}{"                    "}name: 'freeCodeCamp'{"\n"}{"                "}{"}"}{"\n"}{"            "}{"}"}{"\n"}{"            "}render() {"{"}{"\n"}{"                "}const name = this.state.name;{"\n"}{"                "}return ({"\n"}{"                    "}&lt;div&gt;{"\n"}{"                    "}&lt;h1&gt;{"{"}name{"}"}&lt;/h1&gt;{"\n"}{"                    "}&lt;div&gt;{"\n"}{"            "});{"\n"}{"            "}{"}"}{"\n"}{"        "}{"}"};{"\n"}{"    "}</code>{"\n"}</pre>
         </div>
     );
 
